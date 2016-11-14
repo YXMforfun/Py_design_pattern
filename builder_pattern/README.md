@@ -1,9 +1,9 @@
-# 建造者模式 (Builder Pattern) 于抽象工厂模式类似，都可以创建那种需要由其他对象组合而成的复杂对象。
-# 而两者的区别在于，建造者模式不仅提供了创建复杂对象所需的方法，而且保存了复杂对象里各个部分的细节。
+# 建造者模式 (Builder Pattern)
+### 建造者模式 (Builder Pattern) 于抽象工厂模式类似，都可以创建那种需要由其他对象组合而成的复杂对象。而两者的区别在于，建造者模式不仅提供了创建复杂对象所需的方法，而且保存了复杂对象里各个部分的细节。
 
-## 以下例子为，创建一段表单 form。
+### 以下例子为，创建一段表单 form。
 
-## 顶层调用语句
+### 顶层调用语句
 ```
 htmlForm = create_login_form(HtmlFormBuilder())
 with open(htmlFilename, "w", encoding="utf-8") as file:
@@ -25,10 +25,8 @@ def create_login_form(builder):
     return builder.form()
 
 ```
-# 抽象基类
-## metaclass 为 abc.ABCMeta，该类无法初始化。继承自AbstractFormBuilder 的类必须实现所有抽象方法。
-## 这种情况在将C++ 或 Java 代码移植到 Python 时，比较有用。 实际上在 Python 里，有比较宽松的做法，
-## 就是根本不使用 metaclass, 而是直接在文档中说明该类只能作为抽象基类。
+## 抽象基类
+### metaclass 为 abc.ABCMeta，该类无法初始化。继承自AbstractFormBuilder 的类必须实现所有抽象方法。这种情况在将C++ 或 Java 代码移植到 Python 时，比较有用。 实际上在 Python 里，有比较宽松的做法，就是根本不使用 metaclass, 而是直接在文档中说明该类只能作为抽象基类。
 ```
 import abc
 class AbstractFormBuilder(metaclass=abc.ABCMeta):
@@ -98,7 +96,7 @@ class HtmlFormBuilder(AbstractFormBuilder):
 ```
 class TkFormBuilder(AbstractFormBuilder):
 
-    # TEMPLATE 
+    # TEMPLATE
     # 根据内容的不同，模板化运行
     TEMPLATE = """
     #!/usr/bin/env python3
@@ -148,7 +146,7 @@ class TkFormBuilder(AbstractFormBuilder):
         layout = """self.{} Label.grid(row={}, column={}, sticky=tk.W, \
             padx="0.75m", pady="0.75m")""".format(name, row, column)
         self.statements.extends((create, layout))
-    
+
     # add_* 实现都差不多，具体看源码
     ...
 
@@ -158,5 +156,5 @@ class TkFormBuilder(AbstractFormBuilder):
 			statements="\n        ".join(self.statements))
 
 
- 
+
 ```
