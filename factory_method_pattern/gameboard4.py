@@ -63,7 +63,7 @@ class CheckersBoard(AbstractBoard):
         self.populate_board()
 
 
-    def populate_board(self): # Thanks to Doug Hellmann for the idea!
+    def populate_board(self): 
         def black():
             return create_piece(DRAUGHT, BLACK)
         def white():
